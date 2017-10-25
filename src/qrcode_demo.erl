@@ -35,7 +35,7 @@
 %    digits = 6 | 8 (default 6)
 %    counter = integer() (hotp only, default 0?)
 %    period = integer() (in seconds, totp only, default 30)
-%    secret = binary() base32 encoded
+%    secret = binary() qr_base32 encoded
 %    algorithm = MD5 | SHA1 | SHA256 | SHA512 (default SHA1)
 
 
@@ -51,7 +51,7 @@ run() ->
 	run(<<"demo@mydomain.com">>, Passcode, ?PERIOD).
 
 run(Domain, Passcode, Seconds) ->
-	PasscodeBase32 = base32:encode(Passcode),
+	PasscodeBase32 = qr_base32:encode(Passcode),
 	Period = list_to_binary(integer_to_list(Seconds)),
 	Token = <<"otpauth://totp/", Domain/binary, "?period=", Period/binary, "&secret=", PasscodeBase32/binary>>,
 	?TTY({token, Token}),

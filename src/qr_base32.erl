@@ -12,7 +12,7 @@
 % See the License for the specific language governing permissions and
 % limitations under the License.
 
--module(base32).
+-module(qr_base32).
 
 -export([encode/1, decode/1]).
 
